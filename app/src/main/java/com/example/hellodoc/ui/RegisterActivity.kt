@@ -30,16 +30,27 @@ class RegisterActivity : AppCompatActivity() {
             b.addressLayout.error = if (address.isNotBlank()) null else "Adresse obligatoire"
             b.passwordLayout.error = if (password.length in 8..72) null else "8 à 72 caractères"
             b.confirmLayout.error = if (password == confirm) null else "Les mots de passe sont différents"
-            if (!b.checkConsent.isChecked) { toast("Acceptez le traitement des données pour continuer."); return@setOnClickListener }
+            if (!b.checkConsent.isChecked) {
+                toast("Acceptez le traitement des données pour continuer.");
+                return@setOnClickListener
+            }
             val valid = listOf(b.firstLayout, b.lastLayout, b.emailLayout, b.phoneLayout,
-                b.addressLayout, b.passwordLayout, b.confirmLayout).all { it.error == null }
+                b.addressLayout, b.passwordLayout, b.confirmLayout).all {
+                    it.error == null
+                }
             if (valid) vm.register(RegistrationRequest(first, last, email, phone, address, password))
         }
-        vm.busy.observe(this) { busy -> b.progress.isVisible = busy; b.btnRegister.isEnabled = !busy }
-        vm.error.observe(this) { error -> b.tvError.isVisible = !error.isNullOrBlank(); b.tvError.text = error }
-        vm.registered.observe(this) { event -> event.consume()?.let {
-            toast("Compte patient créé. Connectez-vous maintenant.")
-            finish()
-        } }
+        vm.busy.observe(this) {
+            busy -> b.progress.isVisible = busy; b.btnRegister.isEnabled = !busy
+        }
+        vm.error.observe(this) {
+            error -> b.tvError.isVisible = !error.isNullOrBlank(); b.tvError.text = error
+        }
+        vm.registered.observe(this) {
+            event -> event.consume()?.let {
+                toast("Compte patient créé. Connectez-vous maintenant.")
+                finish()
+            }
+        }
     }
 }

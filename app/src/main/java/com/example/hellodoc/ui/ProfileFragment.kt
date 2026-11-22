@@ -20,7 +20,8 @@ import com.example.hellodoc.viewmodel.*
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
-    private val photoPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    private val photoPicker = registerForActivityResult(ActivityResultContracts.GetContent())
+    { uri ->
         if (uri != null) {
             val type = requireContext().contentResolver.getType(uri) ?: ""
             val bytes = requireContext().contentResolver.openInputStream(uri)?.use { stream ->
@@ -50,12 +51,20 @@ class ProfileFragment : Fragment() {
         val b = requireNotNull(_binding)
         vm.photo.observe(viewLifecycleOwner) { imageBytes ->
             val bNow = _binding ?: return@observe
-            val bitmap = imageBytes?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
+            val bitmap = imageBytes?.let {
+                BitmapFactory.decodeByteArray(it, 0, it.size)
+            }
             if (bitmap == null) bNow.imgPhoto.setImageResource(R.drawable.medical_symbol)
             else bNow.imgPhoto.setImageBitmap(bitmap)
         }
-        vm.photoMessage.observe(viewLifecycleOwner) { event -> event.consume()?.let { requireContext().toast(it) } }
-        b.btnChangePhoto.setOnClickListener { photoPicker.launch("image/*") }
+        vm.photoMessage.observe(viewLifecycleOwner) {
+            event -> event.consume()?.let {
+                requireContext().toast(it)
+            }
+        }
+        b.btnChangePhoto.setOnClickListener {
+            photoPicker.launch("image/*")
+        }
         b.btnDeletePhoto.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Supprimer la photo ?")
@@ -88,11 +97,15 @@ class ProfileFragment : Fragment() {
                 requireContext().toast("Vérifiez les champs et saisissez votre mot de passe actuel.")
             } else vm.save(PatientUpdateRequest(first, last, phone, address, pass))
         }
-        vm.saved.observe(viewLifecycleOwner) { event -> event.consume()?.let {
-            b.etPassword.text?.clear()
-            requireContext().toast("Profil mis à jour.")
-        } }
-        b.btnChangePassword.setOnClickListener { showChangePasswordDialog() }
+        vm.saved.observe(viewLifecycleOwner) {
+            event -> event.consume()?.let {
+                b.etPassword.text?.clear()
+                requireContext().toast("Profil mis à jour.")
+            }
+        }
+        b.btnChangePassword.setOnClickListener {
+            showChangePasswordDialog()
+        }
         authVm.passwordChanged.observe(viewLifecycleOwner) { event ->
             event.consume()?.let {
                 passwordDialog?.dismiss()
@@ -110,11 +123,13 @@ class ProfileFragment : Fragment() {
                 .setPositiveButton("Déconnexion") { _, _ -> authVm.logout() }
                 .show()
         }
-        authVm.logoutDone.observe(viewLifecycleOwner) { event -> event.consume()?.let {
-            startActivity(Intent(requireContext(), LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            })
-        } }
+        authVm.logoutDone.observe(viewLifecycleOwner) {
+            event -> event.consume()?.let {
+                startActivity(Intent(requireContext(), LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                })
+            }
+        }
         authVm.error.observe(viewLifecycleOwner) { error ->
             if (error != null) {
                 val dialogBinding = passwordDialogBinding

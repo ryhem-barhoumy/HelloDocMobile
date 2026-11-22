@@ -10,9 +10,7 @@ class DoctorRepository(private val api: HelloDocApi) {
 
     suspend fun specialties(): List<Specialty> = requireBody(api.specialties())
 
-    suspend fun search(
-        name: String?, specialty: String?, city: String?, date: String?
-    ): List<Doctor> {
+    suspend fun search(name: String?, specialty: String?, city: String?, date: String?): List<Doctor> {
         val response = api.doctors(
             name?.takeIf { it.isNotBlank() },
             specialty?.takeIf { it.isNotBlank() },

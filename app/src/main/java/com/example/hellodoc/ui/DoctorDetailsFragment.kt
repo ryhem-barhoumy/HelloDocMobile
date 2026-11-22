@@ -55,10 +55,12 @@ class DoctorDetailsFragment : Fragment() {
                 slots.map { formatClock(it.startsAt) }.ifEmpty { listOf("Aucun créneau") })
             b.btnBook.isEnabled = slots.isNotEmpty() && services.any { !it.price.isNullOrBlank() }
         }
+
         b.btnChooseDate.setOnClickListener { showDatePicker(requireContext()) { date ->
             b.tvDate.text = date
             vm.loadSlots(doctorId, date)
         } }
+
         b.btnBook.setOnClickListener {
             val svc = services.getOrNull(b.spinnerServices.selectedItemPosition) ?: run {
                 requireContext().toast("Aucun service sélectionné."); return@setOnClickListener

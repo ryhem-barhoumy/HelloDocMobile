@@ -8,14 +8,19 @@ import com.example.hellodoc.model.*
 import com.example.hellodoc.repository.DoctorRepository
 
 class DoctorsViewModel(private val repo: DoctorRepository) : ViewModel() {
+
     private val _doctors = MutableLiveData(UiState<List<Doctor>>())
     val doctors: LiveData<UiState<List<Doctor>>> = _doctors
+
     private val _specialties = MutableLiveData<List<Specialty>>(emptyList())
     val specialties: LiveData<List<Specialty>> = _specialties
+
     private val _detail = MutableLiveData(UiState<DoctorDetail>())
     val detail: LiveData<UiState<DoctorDetail>> = _detail
+
     private val _slots = MutableLiveData(UiState<List<TimeSlot>>())
     val slots: LiveData<UiState<List<TimeSlot>>> = _slots
+
     private var searchJob: Job? = null
     var selectedDate: String = java.time.LocalDate.now(java.time.ZoneId.of("Africa/Tunis")).toString()
         private set

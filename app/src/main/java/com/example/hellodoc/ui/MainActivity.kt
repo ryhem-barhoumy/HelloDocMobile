@@ -11,10 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.hellodoc.R
 import com.example.hellodoc.databinding.ActivityMainBinding
 
-/**
- * TP5 : DrawerLayout + NavigationView + Navigation Component.
- * L'application ne contient que les destinations accessibles au patient.
- */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -29,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         val host = supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment
         navController = host.navController
 
-        // Accueil, Médecins, Rendez-vous et Profil affichent le menu hamburger.
-        // La fiche d'un médecin affiche une flèche de retour.
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.homeFragment,

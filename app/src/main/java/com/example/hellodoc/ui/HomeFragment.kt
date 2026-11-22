@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.hellodoc.R
 import com.example.hellodoc.databinding.FragmentHomeBinding
 
-/** Page d'accueil du patient : interface XML simple, comme les Fragments du TP5. */
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = requireNotNull(_binding)
@@ -20,7 +19,6 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // Le FAB de recherche remplace les deux anciens boutons de l'accueil.
         binding.fabSearchDoctor.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_doctors)
         }

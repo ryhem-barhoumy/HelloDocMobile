@@ -67,7 +67,6 @@ class SessionCookieJar(context: Context) : CookieJar {
             val serialized = cookies.joinToString("\n") { it.toString() }
             preferences.edit().putString("cookies", encrypt(serialized)).apply()
         } catch (_: Exception) {
-            // Si Keystore est indisponible, la session reste en mémoire jusqu'à la fermeture.
             preferences.edit().remove("cookies").apply()
         }
     }

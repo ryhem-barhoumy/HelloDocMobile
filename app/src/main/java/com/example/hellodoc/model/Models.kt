@@ -1,8 +1,5 @@
 package com.example.hellodoc.model
 
-/** DTO Kotlin correspondant aux réponses JSON du backend Spring Boot Hello Doc. */
-
-// Authentification et inscription du patient
 data class CsrfToken(val headerName: String, val token: String)
 data class LoginRequest(val email: String, val password: String)
 
@@ -35,7 +32,6 @@ data class Specialty(val id: String, val name: String) {
     override fun toString(): String = name
 }
 
-// Recherche paginée : Spring Boot renvoie un objet avec la propriété content.
 data class PageResponse<T>(
     val content: List<T>,
     val number: Int = 0,
@@ -57,7 +53,8 @@ data class Doctor(
     val status: String?,
     val nextAvailability: String?,
     val photoUrl: String?
-) {
+)
+{
     fun displayName(): String = fullName?.takeIf { it.isNotBlank() }
         ?: "${firstName.orEmpty()} ${lastName.orEmpty()}".trim()
 }
@@ -134,5 +131,4 @@ data class PatientUpdateRequest(
     val currentPassword: String
 )
 
-/** Mot de passe modifié via /api/auth/password (backend réel). */
 data class ChangePasswordRequest(val currentPassword: String, val newPassword: String)

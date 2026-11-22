@@ -9,16 +9,22 @@ import com.example.hellodoc.repository.AppointmentRepository
 class AppointmentsViewModel(private val repo: AppointmentRepository) : ViewModel() {
     private val _appointments = MutableLiveData(UiState<List<Appointment>>())
     val appointments: LiveData<UiState<List<Appointment>>> = _appointments
+
     private val _busy = MutableLiveData(false)
     val busy: LiveData<Boolean> = _busy
+
     private val _message = MutableLiveData<OneTime<String>>()
     val message: LiveData<OneTime<String>> = _message
+
     private val _error = MutableLiveData<String?>(null)
     val error: LiveData<String?> = _error
+
     private val _booked = MutableLiveData<OneTime<Unit>>()
     val booked: LiveData<OneTime<Unit>> = _booked
+
     private val _options = MutableLiveData<OneTime<List<TimeSlot>>>()
     val options: LiveData<OneTime<List<TimeSlot>>> = _options
+
     private var lastHistory = false
 
     fun load(history: Boolean = lastHistory) {
@@ -52,10 +58,15 @@ class AppointmentsViewModel(private val repo: AppointmentRepository) : ViewModel
         if (_busy.value == true) return
         _busy.value = true; _error.value = null
         viewModelScope.launch {
-            try { block() }
-            catch (e: CancellationException) { throw e }
-            catch (e: Exception) { _error.value = friendlyError(e) }
-            finally { _busy.value = false }
+            try {
+                block()
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _error.value = friendlyError(e)
+            } finally {
+                _busy.value = false
+            }
         }
     }
 }

@@ -43,7 +43,6 @@ interface HelloDocApi {
         @Body request: ChangePasswordRequest
     ): Response<Unit>
 
-    // Profil patient
     @GET("patients/me")
     suspend fun patientProfile(): Response<PatientProfile>
 
@@ -66,7 +65,7 @@ interface HelloDocApi {
     @DELETE("account/me/photo")
     suspend fun deletePhoto(@HeaderMap headers: Map<String, String>): Response<Unit>
 
-    // --- Recherche et disponibilité ---
+
     @GET("specialties")
     suspend fun specialties(): Response<List<Specialty>>
 

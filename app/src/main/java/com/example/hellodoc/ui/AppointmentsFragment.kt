@@ -38,7 +38,8 @@ class AppointmentsFragment : Fragment() {
                 b.tvEmpty.isVisible = b.tvEmpty.text.isNotEmpty()
             }
         }
-        vm.options.observe(viewLifecycleOwner) { event -> event.consume()?.let { options ->
+        vm.options.observe(viewLifecycleOwner) {
+            event -> event.consume()?.let { options ->
             if (options.isEmpty()) {
                 requireContext().toast("Aucun créneau disponible à cette date.")
             } else {
@@ -68,7 +69,9 @@ class AppointmentsFragment : Fragment() {
     }
     private fun beginReschedule(a: Appointment) {
         pendingRescheduleId = a.id
-        showDatePicker(requireContext()) { date -> vm.rescheduleOptions(a.id, date) }
+        showDatePicker(requireContext()) {
+            date -> vm.rescheduleOptions(a.id, date)
+        }
     }
     private fun confirmCancellation(a: Appointment) {
         MaterialAlertDialogBuilder(requireContext())

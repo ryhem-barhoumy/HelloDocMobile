@@ -6,9 +6,12 @@ import com.example.hellodoc.model.*
 import com.example.hellodoc.network.HelloDocApi
 import com.example.hellodoc.network.SessionCookieJar
 
-class AuthRepository(private val api: HelloDocApi, private val jar: SessionCookieJar,
-                     private val preferences: SessionPreferences) {
+class AuthRepository(private val api: HelloDocApi,
+    private val jar: SessionCookieJar,
+    private val preferences: SessionPreferences) {
+
     private val mutex = Mutex()
+
     suspend fun csrfHeaders(): Map<String, String> {
         val response = api.csrf()
         val csrf = requireBody(response)
@@ -35,7 +38,10 @@ class AuthRepository(private val api: HelloDocApi, private val jar: SessionCooki
             jar.clear(); preferences.clear(); return null
         }
         val user = requireBody(response)
-        if (!user.isPatient) { jar.clear(); preferences.clear(); return null }
+        if (!user.isPatient) {
+            jar.clear(); preferences.clear();
+            return null
+        }
         return user
     }
     suspend fun changePassword(currentPassword: String, newPassword: String) = mutex.withLock {

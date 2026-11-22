@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hellodoc.databinding.ItemAppointmentBinding
 import com.example.hellodoc.model.Appointment
 
-class AppointmentAdapter(private val onEdit: (Appointment) -> Unit,
-                         private val onCancel: (Appointment) -> Unit) : RecyclerView.Adapter<AppointmentAdapter.Holder>() {
+class AppointmentAdapter(private val onEdit: (Appointment) -> Unit, private val onCancel: (Appointment) -> Unit) : RecyclerView.Adapter<AppointmentAdapter.Holder>() {
     private var items: List<Appointment> = emptyList()
     fun submit(data: List<Appointment>) { items = data; notifyDataSetChanged() }
     inner class Holder(private val b: ItemAppointmentBinding) : RecyclerView.ViewHolder(b.root) {
