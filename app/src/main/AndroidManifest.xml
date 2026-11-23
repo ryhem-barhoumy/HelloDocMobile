@@ -7,8 +7,8 @@
         android:icon="@mipmap/ic_launcher" android:theme="@style/Theme.HelloDoc"
         android:supportsRtl="true">
         <activity android:name=".ui.MainActivity" android:exported="false" />
-        <activity android:name=".ui.RegisterActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.LoginActivity" android:exported="true" android:windowSoftInputMode="adjustResize">
+        <activity android:name=".ui.auth.RegisterActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.auth.LoginActivity" android:exported="true" android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

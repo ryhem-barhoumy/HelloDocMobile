@@ -1,4 +1,4 @@
-package com.example.hellodoc.ui
+package com.example.hellodoc.ui.appointments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.hellodoc.databinding.FragmentAppointmentsBinding
 import com.example.hellodoc.model.Appointment
-import com.example.hellodoc.viewmodel.*
+import com.example.hellodoc.ui.formatInstant
+import com.example.hellodoc.ui.showDatePicker
+import com.example.hellodoc.ui.toast
+import com.example.hellodoc.viewmodel.AppointmentsViewModel
+import com.example.hellodoc.viewmodel.HelloDocViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AppointmentsFragment : Fragment() {
     private var _binding: FragmentAppointmentsBinding? = null
@@ -24,7 +28,8 @@ class AppointmentsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, state: Bundle?) {
         val b = requireNotNull(_binding)
-        val adapter = AppointmentAdapter({ a -> beginReschedule(a) }, { a -> confirmCancellation(a) })
+        val adapter =
+            AppointmentAdapter({ a -> beginReschedule(a) }, { a -> confirmCancellation(a) })
         b.rvAppointments.layoutManager = LinearLayoutManager(requireContext())
         b.rvAppointments.adapter = adapter
         b.btnUpcoming.setOnClickListener { history = false; selectTab(); vm.load(false) }
@@ -69,8 +74,8 @@ class AppointmentsFragment : Fragment() {
     }
     private fun beginReschedule(a: Appointment) {
         pendingRescheduleId = a.id
-        showDatePicker(requireContext()) {
-            date -> vm.rescheduleOptions(a.id, date)
+        showDatePicker(requireContext()) { date ->
+            vm.rescheduleOptions(a.id, date)
         }
     }
     private fun confirmCancellation(a: Appointment) {

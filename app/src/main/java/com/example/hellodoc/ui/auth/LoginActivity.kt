@@ -1,16 +1,19 @@
-package com.example.hellodoc.ui
+package com.example.hellodoc.ui.auth
 
 import android.content.Intent
-import android.os.Bundle
-import android.os.Build
 import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hellodoc.databinding.ActivityLoginBinding
-import com.example.hellodoc.viewmodel.*
+import com.example.hellodoc.ui.MainActivity
+import com.example.hellodoc.ui.toast
+import com.example.hellodoc.viewmodel.AuthViewModel
+import com.example.hellodoc.viewmodel.HelloDocViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
     private val requestLan = registerForActivityResult(ActivityResultContracts.RequestPermission()) { allowed ->

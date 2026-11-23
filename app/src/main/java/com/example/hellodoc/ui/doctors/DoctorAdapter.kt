@@ -1,10 +1,11 @@
-package com.example.hellodoc.ui
+package com.example.hellodoc.ui.doctors
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hellodoc.databinding.ItemDoctorBinding
 import com.example.hellodoc.model.Doctor
+import com.example.hellodoc.ui.formatInstant
 
 class DoctorAdapter(private val onClick: (Doctor) -> Unit) : RecyclerView.Adapter<DoctorAdapter.Holder>() {
     private var items: List<Doctor> = emptyList()

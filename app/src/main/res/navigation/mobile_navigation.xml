@@ -5,29 +5,29 @@
     app:startDestination="@id/homeFragment">
 
     <fragment android:id="@+id/homeFragment"
-        android:name="com.example.hellodoc.ui.HomeFragment"
+        android:name="com.example.hellodoc.ui.home.HomeFragment"
         android:label="@string/nav_home">
         <action android:id="@+id/action_home_to_doctors" app:destination="@id/doctorsFragment" />
         <action android:id="@+id/action_home_to_appointments" app:destination="@id/appointmentsFragment" />
     </fragment>
 
     <fragment android:id="@+id/doctorsFragment"
-        android:name="com.example.hellodoc.ui.DoctorsFragment"
+        android:name="com.example.hellodoc.ui.doctors.DoctorsFragment"
         android:label="@string/nav_doctors">
         <action android:id="@+id/action_doctorsFragment_to_doctorDetailsFragment" app:destination="@id/doctorDetailsFragment" />
     </fragment>
 
     <fragment android:id="@+id/doctorDetailsFragment"
-        android:name="com.example.hellodoc.ui.DoctorDetailsFragment"
+        android:name="com.example.hellodoc.ui.doctors.DoctorDetailsFragment"
         android:label="@string/doctor_details_profil_du_medecin">
         <argument android:name="doctorId" app:argType="string" />
     </fragment>
 
     <fragment android:id="@+id/appointmentsFragment"
-        android:name="com.example.hellodoc.ui.AppointmentsFragment"
+        android:name="com.example.hellodoc.ui.appointments.AppointmentsFragment"
         android:label="@string/nav_appointments" />
 
     <fragment android:id="@+id/profileFragment"
-        android:name="com.example.hellodoc.ui.ProfileFragment"
+        android:name="com.example.hellodoc.ui.profile.ProfileFragment"
         android:label="@string/nav_profile" />
 </navigation>

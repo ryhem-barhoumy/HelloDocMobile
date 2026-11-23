@@ -1,4 +1,4 @@
-package com.example.hellodoc.ui
+package com.example.hellodoc.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

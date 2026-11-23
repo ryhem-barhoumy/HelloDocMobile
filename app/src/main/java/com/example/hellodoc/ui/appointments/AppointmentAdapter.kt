@@ -1,14 +1,16 @@
-package com.example.hellodoc.ui
+package com.example.hellodoc.ui.appointments
 
 import android.content.res.ColorStateList
-import androidx.core.content.ContextCompat
-import com.example.hellodoc.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hellodoc.R
 import com.example.hellodoc.databinding.ItemAppointmentBinding
 import com.example.hellodoc.model.Appointment
+import com.example.hellodoc.ui.formatInstant
+import com.example.hellodoc.ui.statusLabel
 
 class AppointmentAdapter(private val onEdit: (Appointment) -> Unit, private val onCancel: (Appointment) -> Unit) : RecyclerView.Adapter<AppointmentAdapter.Holder>() {
     private var items: List<Appointment> = emptyList()
