@@ -220,7 +220,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bouton de recherche fixe, comme le bouton + du TP, visible pendant le défilement. -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSearchDoctor"
         android:layout_width="wrap_content"
