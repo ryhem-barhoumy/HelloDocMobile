@@ -22,9 +22,13 @@ import com.example.hellodoc.viewmodel.AppointmentsViewModel
 import com.example.hellodoc.viewmodel.DoctorsViewModel
 import com.example.hellodoc.viewmodel.HelloDocViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-
+import androidx.fragment.app.activityViewModels
+import com.example.hellodoc.viewmodel.FavoritesViewModel
 class DoctorDetailsFragment : Fragment() {
     private val vm: DoctorsViewModel by viewModels { HelloDocViewModelFactory(requireActivity().application) }
+    private val favoritesVm: FavoritesViewModel by activityViewModels {
+        HelloDocViewModelFactory(requireActivity().application)
+    }
     private val appointmentVm: AppointmentsViewModel by viewModels {
         HelloDocViewModelFactory(
             requireActivity().application
@@ -42,6 +46,8 @@ class DoctorDetailsFragment : Fragment() {
         val b = requireNotNull(_binding)
         doctorId = requireArguments().getString("doctorId") ?: return
         vm.detail.observe(viewLifecycleOwner) { value ->
+            b.btnFavorite.isEnabled =
+                value.data != null && favoritesVm.busy.value != true
             b.progress.isVisible = value.loading
             b.tvError.isVisible = !value.error.isNullOrBlank()
             b.tvError.text = value.error
@@ -71,6 +77,30 @@ class DoctorDetailsFragment : Fragment() {
                     requireContext(), R.layout.simple_spinner_dropdown_item,
                     slots.map { formatClock(it.startsAt) }.ifEmpty { listOf("Aucun créneau") })
             b.btnBook.isEnabled = slots.isNotEmpty() && services.any { !it.price.isNullOrBlank() }
+        }
+        b.btnFavorite.setOnClickListener {
+            val doctor = vm.detail.value?.data
+
+            if (doctor != null) {
+                favoritesVm.add(doctor)
+            }
+        }
+
+        favoritesVm.busy.observe(viewLifecycleOwner) { busy ->
+            b.btnFavorite.isEnabled =
+                !busy && vm.detail.value?.data != null
+        }
+
+        favoritesVm.message.observe(viewLifecycleOwner) { event ->
+            event.consume()?.let { message ->
+                requireContext().toast(message)
+            }
+        }
+
+        favoritesVm.error.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                requireContext().toast(error)
+            }
         }
 
         b.btnChooseDate.setOnClickListener {

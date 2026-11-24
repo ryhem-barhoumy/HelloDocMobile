@@ -16,14 +16,4 @@ fun friendlyError(e: Exception): String = when (e) {
     else -> e.message ?: "Une erreur est survenue."
 }
 
-class HelloDocViewModelFactory(application: Application) : ViewModelProvider.Factory {
-    private val app = application as HelloDocApp
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T = when (modelClass) {
-        AuthViewModel::class.java -> AuthViewModel(app.authRepository)
-        DoctorsViewModel::class.java -> DoctorsViewModel(app.doctorRepository)
-        AppointmentsViewModel::class.java -> AppointmentsViewModel(app.appointmentRepository)
-        ProfileViewModel::class.java -> ProfileViewModel(app.patientRepository)
-        else -> throw IllegalArgumentException("ViewModel inconnu: ${modelClass.name}")
-    } as T
-}
+

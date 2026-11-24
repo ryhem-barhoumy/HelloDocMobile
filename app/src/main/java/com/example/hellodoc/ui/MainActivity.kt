@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.homeFragment,
                 R.id.doctorsFragment,
+                R.id.favoritesFragment,
                 R.id.appointmentsFragment,
                 R.id.profileFragment
             ),

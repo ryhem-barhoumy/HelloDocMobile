@@ -102,7 +102,7 @@ class SessionCookieJar(context: Context) : CookieJar {
 }
 
 object RetrofitClient {
-    const val BASE_URL = "http://10.222.181.180:8081/api/"
+    const val BASE_URL = "http://10.0.2.2:8081/api/"
 
     private lateinit var sessionJar: SessionCookieJar
 

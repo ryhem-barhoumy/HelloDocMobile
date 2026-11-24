@@ -10,6 +10,15 @@
           <TextView android:id="@+id/tvLocation" style="@style/HdCaption" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="8dp"/>
           <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginVertical="14dp" android:background="@color/hd_line"/>
           <TextView android:id="@+id/tvDescription" style="@style/HdCaption" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+          <com.google.android.material.button.MaterialButton
+              android:id="@+id/btnFavorite"
+              style="@style/HdOutlinedButton"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="12dp"
+              android:minHeight="48dp"
+              android:text="Ajouter à mes favoris"
+              android:enabled="false" />
         </LinearLayout>
       </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

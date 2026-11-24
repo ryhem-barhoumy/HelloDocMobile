@@ -3,7 +3,7 @@ package com.example.hellodoc
 import android.app.Application
 import com.example.hellodoc.network.RetrofitClient
 import com.example.hellodoc.repository.*
-
+import com.example.hellodoc.data.local.database.HelloDocDatabase
 class HelloDocApp : Application() {
     lateinit var session: SessionPreferences
         private set
@@ -11,7 +11,12 @@ class HelloDocApp : Application() {
     val doctorRepository by lazy { DoctorRepository(RetrofitClient.api) }
     val appointmentRepository by lazy { AppointmentRepository(RetrofitClient.api, authRepository) }
     val patientRepository by lazy { PatientRepository(RetrofitClient.api, authRepository) }
-
+    val database: HelloDocDatabase by lazy {
+        HelloDocDatabase.getDatabase(this)
+    }
+    val favoriteDoctorRepository: FavoriteDoctorRepository by lazy {
+        FavoriteDoctorRepository(database.favoriteDoctorDao())
+    }
     override fun onCreate() {
         super.onCreate()
         RetrofitClient.initialize(this)
