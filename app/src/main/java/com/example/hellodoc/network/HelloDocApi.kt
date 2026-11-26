@@ -43,6 +43,12 @@ interface HelloDocApi {
         @Body request: ChangePasswordRequest
     ): Response<Unit>
 
+    @POST("auth/reset-password")
+    suspend fun resetPassword(
+        @HeaderMap headers: Map<String, String>,
+        @Body request: ResetPasswordRequest
+    ): Response<Unit>
+
     @GET("patients/me")
     suspend fun patientProfile(): Response<PatientProfile>
 

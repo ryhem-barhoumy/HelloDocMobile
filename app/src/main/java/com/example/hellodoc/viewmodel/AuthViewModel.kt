@@ -26,6 +26,9 @@ class AuthViewModel(private val repo: AuthRepository) : ViewModel() {
     private val _passwordChanged = MutableLiveData<OneTime<Unit>>()
     val passwordChanged: LiveData<OneTime<Unit>> = _passwordChanged
 
+    private val _passwordReset = MutableLiveData<OneTime<Unit>>()
+    val passwordReset: LiveData<OneTime<Unit>> = _passwordReset
+
     private val _logout = MutableLiveData<OneTime<Unit>>()
     val logoutDone: LiveData<OneTime<Unit>> = _logout
 
@@ -52,6 +55,11 @@ class AuthViewModel(private val repo: AuthRepository) : ViewModel() {
     fun changePassword(currentPassword: String, newPassword: String) = runAction {
         repo.changePassword(currentPassword, newPassword)
         _passwordChanged.value = OneTime(Unit)
+    }
+
+    fun resetPassword(body: ResetPasswordRequest) = runAction {
+        repo.resetPassword(body)
+        _passwordReset.value = OneTime(Unit)
     }
 
     fun logout() = runAction {

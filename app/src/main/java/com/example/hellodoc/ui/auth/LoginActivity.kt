@@ -32,6 +32,9 @@ class LoginActivity : AppCompatActivity() {
             if (b.emailLayout.error == null && b.passwordLayout.error == null) vm.login(email, pwd)
         }
         b.btnRegister.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
+        b.btnForgotPassword.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        }
         vm.busy.observe(this) { busy ->
             b.progress.isVisible = busy
             b.btnLogin.isEnabled = !busy

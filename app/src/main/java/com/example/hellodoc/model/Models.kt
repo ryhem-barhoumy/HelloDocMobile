@@ -132,3 +132,14 @@ data class PatientUpdateRequest(
 )
 
 data class ChangePasswordRequest(val currentPassword: String, val newPassword: String)
+/*data class ForgotPasswordRequest(
+    val email: String
+)*/
+
+data class ResetPasswordRequest(
+    val email: String,
+    val phone: String,
+    val firstName: String,
+    val lastName: String,
+    val newPassword: String
+)

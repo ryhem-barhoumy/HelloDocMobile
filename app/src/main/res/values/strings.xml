@@ -99,4 +99,18 @@
     <string name="password_check">Vérifiez les mots de passe saisis.</string>
     <string name="profile_security">Sécurité de mon compte</string>
     <string name="profile_security_hint">Changez votre mot de passe et gérez votre connexion en toute sécurité.</string>
+
+
+    <string name="login_forgot_password">Mot de passe oublié ?</string>
+    <string name="forgot_password_title">Récupération du mot de passe</string>
+    <string name="forgot_password_description">Renseignez vos informations personnelles.</string>
+    <string name="forgot_password_continue">Continuer</string>
+    <string name="forgot_password_new">Nouveau mot de passe</string>
+    <string name="forgot_password_confirm">Confirmer le mot de passe</string>
+    <string name="forgot_password_reset">Réinitialiser le mot de passe</string>
+    <string name="forgot_password_back">Retour à la connexion</string>
+    <string name="forgot_password_required">Veuillez remplir tous les champs.</string>
+    <string name="forgot_password_mismatch">Les mots de passe ne correspondent pas.</string>
+    <string name="forgot_password_demo">Mode démonstration</string>
+    <string name="forgot_password_demo_success">Simulation réussie. Votre mot de passe réel reste inchangé.</string>
 </resources>

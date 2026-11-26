@@ -51,6 +51,11 @@ class AuthRepository(private val api: HelloDocApi,
         if (!response.isSuccessful) throw parseFailure(response)
     }
 
+    suspend fun resetPassword(body: ResetPasswordRequest) = mutex.withLock {
+        val response = api.resetPassword(csrfHeaders(), body)
+        if (!response.isSuccessful) throw parseFailure(response)
+    }
+
     suspend fun logout() = mutex.withLock {
         try {
             val response = api.logout(csrfHeaders())
